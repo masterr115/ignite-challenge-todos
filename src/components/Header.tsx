@@ -17,11 +17,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#273FAD',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   headerText: {
     fontSize: 24,
     color: '#FFF',
     fontFamily: 'Poppins-Regular',
+    marginTop: 40
   }
 });
