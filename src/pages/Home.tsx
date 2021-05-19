@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Alert, Image, TouchableOpacity, View } from 'react-native';
 
 import { Header } from '../components/Header';
 import { MyTasksList } from '../components/MyTasksList';
 import { TodoInput } from '../components/TodoInput';
+import sun1 from '../assets/icons/sun1.png';
+import sun2 from '../assets/icons/sun2.png';
+
 
 interface Task {
   id: number;
@@ -12,7 +15,9 @@ interface Task {
 }
 
 export function Home() {
+
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [themeColor, setThemeColor] = useState('White');
 
   function handleAddTask(newTaskTitle: string) {
     
@@ -56,17 +61,38 @@ export function Home() {
     
   }
 
+  function handleThemeColor() {
+
+    if (themeColor == 'White') {
+      setThemeColor('Dark')
+    } else if (themeColor == 'Dark') {
+      setThemeColor('White')
+    }
+
+  }
+
   return (
     <>
-      <Header />
+      <Header theme={themeColor}/>
 
-      <TodoInput addTask={handleAddTask} />
+        <View>
+          <TouchableOpacity 
+          style={{marginTop: -80, marginLeft: 350}}
+          onPress={handleThemeColor}
+          >
+            <Image source={themeColor == "White" ? sun1 : sun2}/>
+          </TouchableOpacity>
+        </View>
 
-      <MyTasksList
-        tasks={tasks} 
-        onPress={handleMarkTaskAsDone} 
-        onLongPress={handleRemoveTask} 
-      />
+        <View style={{backgroundColor: themeColor == "White" ? "#FFFF" : "#191622", flex: 1}}>
+        <TodoInput addTask={handleAddTask} theme={themeColor} />
+          <MyTasksList
+            tasks={tasks}
+            theme={themeColor} 
+            onPress={handleMarkTaskAsDone} 
+            onLongPress={handleRemoveTask} 
+          />
+      </View>
     </>
   )
 }

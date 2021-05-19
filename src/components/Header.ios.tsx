@@ -1,24 +1,36 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-export function Header() {
+interface HeaderTheme{
+  theme: string;
+}
+
+export function Header({ theme }: HeaderTheme) {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>to.</Text>
-        <Text style={[styles.headerText, { fontFamily: 'Poppins-SemiBold' }]}>do</Text>
+    <SafeAreaView style={theme == 'White' ? {backgroundColor: '#273FAD'} : {backgroundColor: '#483C67'}}>
+      <View style={[styles.header, 
+        theme == 'White' ? {backgroundColor: '#273FAD'} : {backgroundColor: '#483C67'}]}
+      >
+        <Text style={[
+          styles.headerText, 
+          theme == 'White' ? {color: '#FFF'} : {color: '#E1E1E6'}]}
+        >
+          to.
+        </Text>
+        <Text style={[styles.headerText, 
+          { fontFamily: 'Poppins-SemiBold' }, 
+          theme == 'White' ? {color: '#FFF'} : {color: '#E1E1E6'}]}
+        >
+          do
+        </Text>
       </View>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#273FAD',
-  },
   header: {
     paddingBottom: 44,
-    backgroundColor: '#273FAD',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row'
